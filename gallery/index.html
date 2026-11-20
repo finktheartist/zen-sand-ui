@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zen Sand UI</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="Four UI controls made of sand that moves like sand: a rake slider, a stone toggle, a signature pad and an AI thinking state. Each is one file with no dependencies.">
+<meta property="og:title" content="Zen Sand UI">
+<meta property="og:description" content="Four UI controls made of sand that moves like sand. Each is one file with no dependencies.">
+<meta property="og:image" content="title.jpg">
+<style>
+  /* The gallery: every control live on one page, with its install line and a prompt for a coding agent. */
+  :root { --page: #e9e4da; --card: #f1ede5; --ink: #2b2a27; --mute: #7c766b; --line: #d6cec0; }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; overflow-x: clip; background: var(--page); }
+  body { margin: 0; color: var(--ink); font: 15px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; overflow-x: clip; }
+  a { color: inherit; } button { font: inherit; color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 48px 16px 72px; }
+  header { text-align: center; }
+  h1 { margin: 0; font-size: clamp(34px, 6vw, 52px); font-weight: 600; letter-spacing: -.02em; }
+  .lede { margin: 12px auto 0; max-width: 600px; font-size: 17px; color: #4a463f; }
+  .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 18px 0 0; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 15px; border-radius: 99px; border: 1px solid #cfc8bb; background: none; font-size: 14px; text-decoration: none; cursor: pointer; }
+  .pill:hover { background: #f4f0e8; } .pill.dark { background: #3a3631; border-color: #3a3631; color: #f1ede5; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); max-width: 900px; margin-left: auto; margin-right: auto; gap: 18px; margin-top: 40px; }
+  .piece { background: var(--card); border-radius: 22px; padding: 22px 20px 18px; display: flex; flex-direction: column; box-shadow: 0 1px 0 #fff8 inset, 0 1px 2px #0001; }
+  .piece h2 { margin: 0; font-size: 18px; font-weight: 600; }
+  .piece .tag { margin: 2px 0 0; color: var(--mute); font-size: 13px; }
+  .piece .tag code { font: 12px ui-monospace, monospace; }
+  .stage { flex: 1; display: grid; place-items: center; align-content: center; gap: 10px; min-height: 230px; padding: 16px 0 10px; }
+  .stage > :is(sand-slider, sand-signature) { width: 100%; }
+  .stage > sand-toggle { width: 190px; } .stage > sand-thinking { width: 210px; }
+  .field { width: 100%; display: flex; justify-content: space-between; font-size: 14px; font-weight: 500; } .field output { color: var(--mute); font-variant-numeric: tabular-nums; }
+  .mini { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
+  .mini .pill { padding: 3px 10px; font-size: 12.5px; }
+  .acts { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .acts .pill { padding: 4px 12px; font-size: 13px; }
+  .note { margin: 40px auto 0; max-width: 640px; text-align: center; color: var(--mute); font-size: 14px; }
+  .note code { font: 12.5px ui-monospace, monospace; padding: 1px 5px; border-radius: 5px; background: var(--card); border: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Zen Sand UI</h1>
+    <p class="lede">Four ordinary controls made of sand that moves like sand. Rake it, push a stone through it, sign your name in it, and watch an AI think in it. Each one is a single file with no dependencies.</p>
+    <p class="links">
+      <button class="pill dark" type="button" id="snd">Sound on</button>
+      <a class="pill" href="https://github.com/finktheartist/zen-sand-ui" target="_blank" rel="noopener">The repo on GitHub <span aria-hidden="true">&#8599;</span></a>
+      <a class="pill" href="https://x.com/crtvTeknologist" target="_blank" rel="noopener">@crtvTeknologist on X <span aria-hidden="true">&#8599;</span></a>
+    </p>
+  </header>
+  <main class="grid" id="grid"></main>
+  <p class="note">The sand is simulated: every groove, heap and ripple is a height field that slumps to its angle of rest, lit on the GPU. Sound plays after your first touch; <code>ZenSand.Sound.on = false</code> turns it off.</p>
+</div>
+<script src="../slider/slider.js"></script>
+<script src="../toggle/toggle.js"></script>
+<script src="../signature/signature.js"></script>
+<script src="../thinking/thinking.js"></script>
+<script>
+// The gallery: every control live on one page, with its install line and a prompt that hands a coding agent the real file.
+const REPO = 'finktheartist/zen-sand-ui';
+const ITEMS = [
+  { id: 'slider', name: 'Slider', tag: 'sand-slider', sub: 'A rake in a tray of sand.',
+    html: '<div class="field"><span>Volume</span><output></output></div><sand-slider value="40" label="Volume"></sand-slider>',
+    wire: (el, c) => { const o = c.querySelector('output'), f = () => o.textContent = el.value + '%'; el.addEventListener('input', f); f(); } },
+  { id: 'toggle', name: 'Toggle', tag: 'sand-toggle', sub: 'A stone that hides a seal.',
+    html: '<div class="field"><span>Focus mode</span><output></output></div><sand-toggle label="Focus mode"></sand-toggle>',
+    wire: (el, c) => { const o = c.querySelector('output'), f = () => o.textContent = el.checked ? 'On' : 'Off'; el.addEventListener('change', f); f(); } },
+  { id: 'signature', name: 'Signature', tag: 'sand-signature', sub: 'Sign your name with a stick.',
+    html: '<sand-signature name="signature"></sand-signature><div class="mini"><button class="pill" type="button" data-a="undo">Undo</button><button class="pill" type="button" data-a="clear">Clear</button></div>',
+    wire: (el, c) => { c.querySelector('[data-a=undo]').onclick = () => el.undo(); c.querySelector('[data-a=clear]').onclick = () => el.clear(); } },
+  { id: 'thinking', name: 'Thinking', tag: 'sand-thinking', sub: 'A different line for each state.',
+    html: '<sand-thinking state="thinking"></sand-thinking><div class="mini">' + [['thinking', 'Thinking'], ['searching', 'Searching'], ['tool', 'Using a tool'], ['writing', 'Writing'], ['idle', 'Done']].map(([s, t], i) => `<button class="pill${i ? '' : ' dark'}" type="button" data-s="${s}">${t}</button>`).join('') + '</div>',
+    wire: (el, c) => { c.querySelector('.mini').onclick = (e) => { const b = e.target.closest('button'); if (!b) return; el.state = b.dataset.s; for (const x of b.parentNode.children) x.classList.toggle('dark', x === b); }; } },
+];
+// What each prompt says about wiring its control in. The rest of the prompt is the same for all of them.
+const WIRE = {
+  slider: ['Use <sand-slider value="40" label="..."></sand-slider> where my slider is. min, max and step work as attributes, like a range input.',
+    'Read el.value. It fires input while it moves and change when it comes to rest. With a name attribute it is sent with its form.',
+    'The value is not drawn on it: the grooves show how far it has gone. Put the number beside it.'],
+  toggle: ['Use <sand-toggle label="..."></sand-toggle> where my switch is. The label is what a screen reader hears, so name the setting; add checked to start it on.',
+    'Read el.checked and listen for change. With a name attribute it is sent with its form like a checkbox (value "on", or the value attribute).',
+    'On is shown by the stone having moved and uncovered a power symbol, not by a colour. Put the setting\'s name beside it.'],
+  signature: ['Use <sand-signature name="signature"></sand-signature> where my signature field is, as wide as the form.',
+    'el.empty says whether anything is signed; it fires input after every stroke, undo and clear. el.undo() and el.clear() are there for buttons; give me those buttons next to it.',
+    'To keep the signature, use el.toDataURL(): ink on a transparent PNG, not a picture of the sand. With a name attribute its form gets that PNG as a data URL.'],
+  thinking: ['Put <sand-thinking></sand-thinking> where my agent shows that it is working, about 76 pixels wide next to a chat message or bigger on its own.',
+    'Set el.state as the agent works: "thinking", "searching", "tool" while it calls a tool, "writing" while it streams its answer, and "idle" when it is done. Each state rakes a different line.',
+    'A change of state takes about two seconds to show, because the sand sweeps itself smooth first. Do not switch faster than that.'],
+};
+const SKILL = { url: new URL('../skills/zen-sand-ui/SKILL.md', location.href).href, install: `npx skills add ${REPO}` };
+const fileUrl = (id) => new URL(`../${id}/${id}.js`, location.href).href;
+const prompt = (it) => [
+  `Add the Zen Sand ${it.name.toLowerCase()} to my app. It is a single JavaScript file with no dependencies that defines a <${it.tag}> element.`,
+  `1. Get the file from ${fileUrl(it.id)} and save it in my project as ${it.id}.js. Do not rewrite it or split it up: the sand engine and the sounds are inside it.`,
+  `2. Load it with a plain script tag (not type="module").`,
+  ...WIRE[it.id].map((l, i) => `${i + 3}. ${l}`),
+  `${WIRE[it.id].length + 3}. It scales to its CSS width and the height follows. It needs WebGL2 to draw, and it is made for a light page. It plays sounds after the first touch on the page; ZenSand.Sound.on = false turns them off.`,
+  `When you are done, show me where you put it and what listens to it. If something about it needs to look different, tell me instead of editing the sand code.`,
+  ``,
+  `These controls were made with my zen-sand-ui skill: ${SKILL.url}`,
+  `If you can install skills, install it with: ${SKILL.install}`,
+  `Read it before you start. For this job, follow its "Wire it in" section.`,
+].join('\n');
+const grid = document.getElementById('grid');
+for (const it of ITEMS) {
+  const card = document.createElement('section'); card.className = 'piece'; card.dataset.c = it.id;
+  card.innerHTML = `<h2>${it.name}</h2><p class="tag">${it.sub} <code>&lt;${it.tag}&gt;</code></p><div class="stage">${it.html}</div>
+    <div class="acts"><a class="pill" href="../${it.id}/">Docs</a><button class="pill" type="button" data-copy="cmd">Copy install</button><button class="pill" type="button" data-copy="prompt">Copy a prompt</button></div>`;
+  grid.append(card);
+  it.wire(card.querySelector(it.tag), card);
+  for (const b of card.querySelectorAll('[data-copy]')) b.addEventListener('click', async () => {
+    const text = b.dataset.copy === 'cmd' ? `npx shadcn add ${REPO}/${it.id}` : prompt(it), was = b.textContent;
+    try { await navigator.clipboard.writeText(text); b.textContent = 'Copied'; } catch { b.textContent = 'Could not copy'; }
+    setTimeout(() => (b.textContent = was), 1400);
+  });
+}
+document.getElementById('snd').onclick = (e) => { ZenSand.Sound.wake(); e.target.textContent = ZenSand.Sound.toggle() ? 'Sound on' : 'Sound off'; };
+</script>
+</body>
+</html>

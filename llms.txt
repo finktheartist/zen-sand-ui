@@ -1,0 +1,31 @@
+# Zen Sand UI
+
+> Four UI controls made of sand that moves like sand: a slider that is a rake, a toggle that is a stone that hides a symbol, a signature pad you write in with a stick, and an AI thinking state that rakes a different line for each thing the agent does. The sand is a simulated height field lit on the GPU. Each control is one plain script that registers a custom element, with its engine and recorded sounds inside it: no dependencies, no build step, no other files to fetch. MIT licensed.
+
+Live gallery: https://zen-sand-ui.vercel.app
+Source: https://github.com/finktheartist/zen-sand-ui
+
+## Drop-in controls
+
+Each is one plain script that registers a custom element. Load it with a script tag, not as a module. Do not rewrite or split the file: the sounds (and the thinking state's rock) are inside it as data. Each file carries a copy of the shared engine; the first one loaded sets window.ZenSand and the rest reuse it.
+
+- [Slider](https://zen-sand-ui.vercel.app/slider/slider.js): A slider that is a bamboo rake in a tray of sand. Drag right and its four tines cut grooves and push a little heap of sand ahead of it; pull back and its back drags the sand flat again. `<sand-slider>`: Use <sand-slider value="40" label="Volume"></sand-slider>. Read el.value; it fires input while it moves and change when it comes to rest. min, max and step work; with a name it is sent with its form. [Docs](https://github.com/finktheartist/zen-sand-ui/blob/main/slider/README.md)
+- [Toggle](https://zen-sand-ui.vercel.app/toggle/toggle.js): A switch that is a river stone in a tray of raked sand. Switch it on and the stone glides along, parting the sand into a wake, and uncovers a power symbol it had pressed into the sand where it was resting. `<sand-toggle>`: Use <sand-toggle label="Focus mode"></sand-toggle>. Read el.checked and listen for change. Works in forms with a name. [Docs](https://github.com/finktheartist/zen-sand-ui/blob/main/toggle/README.md)
+- [Signature](https://zen-sand-ui.vercel.app/signature/signature.js): A signature pad of smoothed sand, written in with a stick that cuts like a brush: linger and the line is wide and deep, hurry and it thins. The sand heaps up along the line. Clear sends a rake across that smooths it all away. `<sand-signature>`: Use <sand-signature name="signature"></sand-signature>. el.empty, el.undo(), el.clear() and el.toDataURL() give you the signature as ink on a transparent PNG; it fires input after each stroke. With a name its form gets the PNG. [Docs](https://github.com/finktheartist/zen-sand-ui/blob/main/signature/README.md)
+- [Thinking](https://zen-sand-ui.vercel.app/thinking/thinking.js): An AI agent's working state as a rock in a round tray of sand that rakes itself. Thinking draws rings round the rock, searching draws spokes, using a tool draws lines that flow round it like water, and writing draws dashes like lines of text. `<sand-thinking>`: Use <sand-thinking state="thinking"></sand-thinking> and set el.state to thinking, searching, tool, writing or idle as your agent works. It is a status region, so the state is read out. [Docs](https://github.com/finktheartist/zen-sand-ui/blob/main/thinking/README.md)
+
+Install any one with the shadcn CLI: `npx shadcn add finktheartist/zen-sand-ui/NAME`, where NAME is slider, toggle, signature, thinking. The file lands in `public/zen-sand-ui/`.
+
+Each scales to its CSS width and needs WebGL2 to draw. They are drawn for a light page. Sound plays after the first touch or key on the page; ZenSand.Sound.on = false silences them all. They do not stop moving for prefers-reduced-motion.
+
+## The skill
+
+- [zen-sand-ui skill](https://zen-sand-ui.vercel.app/skills/zen-sand-ui/SKILL.md): how the set was made and the rules it follows. Install with `npx skills add finktheartist/zen-sand-ui`.
+- [core.js](https://zen-sand-ui.vercel.app/skills/zen-sand-ui/core.js): the sand engine (height field, slumping, raked lines, the GPU lighting, stones, sound).
+- [starter.html](https://zen-sand-ui.vercel.app/skills/zen-sand-ui/starter.html): the smallest whole example, a tray you draw in with your finger.
+- [look.mjs](https://zen-sand-ui.vercel.app/skills/zen-sand-ui/look.mjs): drives a page with a slowed CPU, measures frame times and saves frames side by side.
+
+## How it was made
+
+- [making-of/README.md](https://zen-sand-ui.vercel.app/making-of/README.md): the idea, how the sand works, and the corrections that shaped each control.
+- [making-of/prompts.md](https://zen-sand-ui.vercel.app/making-of/prompts.md): every image and sound prompt, in order.

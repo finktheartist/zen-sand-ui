@@ -1,0 +1,77 @@
+# Every prompt, in order
+
+The images were made with GPT Image 2.6 (`gpt_image_2_6`) through Higgsfield; the sounds with ElevenLabs' sound-effects model (`eleven_text_to_sound_v3`), four takes of each, prompt influence 0.3. The controls themselves are not generated: the sand, the stones and the rake are drawn in code. Only the thinking state's rock is a generated image.
+
+## 1. The idea still
+
+One of ten theme stills for the set (the other nine themes were cut). 3:2.
+
+> UI component concept still, seen from directly above, strictly top-down orthographic. Three ordinary web controls in one horizontal row on a plain pale stone page, at realistic UI proportions: a pill toggle switch (on), a horizontal slider, and a rectangular rounded button. Theme: ZEN SAND GARDEN. Each control is a shallow tray of fine raked sand in a thin dark wooden frame. The toggle's thumb is a smooth rounded grey river stone with raked rings around it; the slider's track is a set of parallel raked grooves that stop where a small bamboo rake head sits as the thumb, smooth sand ahead of it; the button is a sand pad with concentric ripples around a flat stone. Stylized chunky shapes, realistic grain and soft raking light. Limited palette: sand, charcoal, moss green. No text, no perspective, no depth of field, no plants, no scene, no photograph.
+
+## 2. Concept sheets
+
+Each with the idea still above as the image reference. The sheets show more controls than were built; they were for deciding the look, not a plan.
+
+- **3:2**: Same look as the reference image: web UI controls as small trays of fine raked sand in thin dark wooden frames, seen strictly from directly above, flat orthographic, on a plain pale stone page. Make a full component set laid out in a tidy 3x3 grid with generous spacing, each at realistic UI size: pill toggle (a smooth grey river stone thumb with raked rings), horizontal slider (raked grooves behind a small bamboo rake head, smooth sand ahead), rectangular button (concentric ripples around a flat stone), square checkbox (a check mark drawn as a groove in the sand), radio group of three small stones (the chosen one ringed by raked circles), three tabs (raked lines under the active tab run a different direction), a text input (a word written in the sand with a stick), a progress bar (half raked, half smooth), and a round loader (a spiral being raked around a stone). Chunky stylized shapes, realistic sand grain and low raking light casting soft groove shadows. Palette: sand, charcoal, moss green. No labels, no perspective, no depth of field, no plants, no photograph of a garden.
+
+- **21:9**: Same look as the reference image, strictly top-down flat orthographic, plain pale stone page. Two copies of the same pill toggle switch side by side, at large UI size. LEFT = off: a smooth grey river stone rests at the left end of a pill tray of fine raked sand, a few raked rings around it, the rest of the tray raked in straight lines. RIGHT = on: the stone now rests at the right end, the tray's inside has turned to moss-green tinted sand around it, a shallow furrow shows the path the stone slid along, a little bow wave of displaced sand piled at the end where it stopped, fresh rings around it. Chunky stylized shapes, realistic grain and raking light. No text, no perspective.
+
+- **21:9**: Same look as the reference image, strictly top-down flat orthographic, plain pale stone page. Two copies of the same horizontal slider stacked one above the other, wide, at large UI size, each a long narrow tray of fine sand in a thin dark wood frame. TOP at 30 percent: a small bamboo rake head as the thumb, five neat parallel raked grooves behind it to the left, smooth untouched sand ahead to the right. BOTTOM at 80 percent: the same rake head far to the right, long parallel grooves behind it, a tiny ridge of sand pushed up in front of the rake. Small charcoal tick marks along the frame. Chunky stylized shapes, realistic grain and low raking light. No text, no perspective.
+
+- **21:9**: Same look as the reference image, strictly top-down flat orthographic, plain pale stone page. Three states of the same rectangular button, side by side, each a sand tray in a thin dark wood frame with the word SEND written cleanly in charcoal small caps on the wooden frame's bottom edge. LEFT rest: smooth raked straight lines. MIDDLE pressed: a flat dark stone pressed into the center, sand pushed up in a ring around it. RIGHT released: the stone lifted away leaving a crisp dent, three concentric ripple rings spreading out across the straight lines. Chunky stylized shapes, realistic grain and raking light. No perspective, no other text.
+
+- **21:9**: Same look as the reference image, strictly top-down flat orthographic, plain pale stone page. Left half: two square checkboxes, each a small square sand tray in a thin dark wood frame; one unchecked with smooth raked lines, one checked with a bold check mark carved as a deep groove in the sand, a thin bamboo stick lying beside it. Right half: a radio group, three small round sand dishes in a row; the selected one holds a dark stone with raked rings around it, the other two are smooth. Small charcoal labels beside each: 'Remember me', 'Morning', 'Noon', 'Night'. Chunky stylized shapes, realistic grain and raking light. No perspective.
+
+- **21:9**: Same look as the reference image, strictly top-down flat orthographic, plain pale stone page. Top: a segmented tabs control, one long tray of raked sand in a dark wood frame divided by thin wooden strips into three tabs labeled in small charcoal caps 'Day', 'Week', 'Month'; under the active middle tab the raked lines run vertically and look freshly raked, under the others they run horizontally and calm. Bottom: a wide text input tray of smooth sand with the words 'see you at dawn' written into the sand by hand with a stick, crisp grooves with tiny ridges, and a thin bamboo stick tip resting at the end as the caret. Chunky stylized shapes, realistic grain and raking light. No perspective.
+
+- **21:9**: Same look as the reference image, strictly top-down flat orthographic, plain pale stone page. Left: a long progress bar tray, the left 60 percent raked into neat straight parallel lines, the rest smooth, a small bamboo rake head at the boundary. Right: a round loader, a circular sand dish in a dark wood ring with a single grey stone at the center and a spiral groove being raked outward around it, two and a half turns done. Far right: a small notification card, a sand tray with a ripple pattern and a single moss-green pebble, small charcoal text on the frame 'Saved'. Chunky stylized shapes, realistic grain and raking light. No perspective.
+
+- **3:2**: Same look as the reference image, strictly top-down flat orthographic. A real app settings panel in use: a clean pale stone card on a slightly darker plain page, with a small charcoal heading 'Focus', and four rows each with a plain charcoal sans-serif label on the left and a sand control on the right: 'Do not disturb' with a sand toggle (stone at the on end, moss tint), 'Session length' with a sand slider half raked and a value '45 min', 'Sound' with a three-stone radio group, and a 'Start' sand button at the bottom. Everything aligned to a tidy grid, generous spacing, realistic UI proportions. Chunky stylized controls, realistic grain and raking light. Palette sand, charcoal, moss. No perspective, no plants.
+
+- **21:9**: Animation storyboard, four equal panels in a row with thin gaps, each panel the same top-down flat view of one pill toggle sand tray on a pale stone page, small charcoal frame numbers 1 2 3 4 under the panels. 1: stone resting at the left end, raked rings around it. 2: the stone sliding right, carving a shallow furrow, the rings behind it smearing. 3: the stone hits the right end and a bow wave of sand sprays up and settles, a few grains scattered. 4: the stone at rest on the right, moss tint spreading through the sand, fresh rings rippling out around it, the furrow already softening. Same look as the reference, chunky stylized, realistic grain and raking light. No perspective.
+
+- **21:9**: Animation storyboard, four equal panels stacked as rows, each the same top-down flat view of one long slider sand tray on a pale stone page, small charcoal numbers 1 2 3 4 at the left. 1: smooth untouched sand, bamboo rake head at the far left. 2: rake head dragged to 40 percent, crisp parallel grooves behind it, a small ridge of sand pushed in front. 3: rake head pulled back to 25 percent, the grooves it passed back over smoothed flat again. 4: a double click: the whole tray gently re-raked smooth in one sweep, rake head home. Same look as the reference, chunky stylized, realistic grain and raking light. No perspective.
+
+## 3. Two sheets revised after a design review
+
+A second model reviewed the sheets and caught flat text sitting on top of the sand and a cliché meditation panel. Same reference image.
+
+- **21:9**: Same look as the reference image, strictly top-down flat orthographic, plain pale stone page. Top: a segmented tabs control, one long tray of raked sand in a thin walnut frame divided by thin walnut strips into three tabs. The labels DAY, WEEK, MONTH are not printed on top: each is pressed into the sand as crisp carved letters in a clean geometric sans-serif, with tiny ridges and real shadow; under the active middle tab the sand is moss-tinted and its raked lines run vertically, the other two calm horizontal lines. Bottom: a wide text input tray of smooth sand; the typed words 'north studio, 9am' are carved neatly into the sand in a clean upright sans-serif like type set in sand, left-aligned, perfectly legible, with a small thin bamboo stick tip standing just after the last letter as the caret. Chunky stylized shapes, realistic grain and low raking light. No cursive, no pencil, no perspective.
+
+- **3:2**: Same control look as the reference image, strictly top-down flat orthographic. A camera app settings panel: a clean pale stone card on a slightly darker plain page, small charcoal heading 'Camera' set in a clean geometric sans-serif, and four rows on a strict grid with labels left-aligned and controls right-aligned to one column edge: 'Flash' with a sand toggle (stone at the on end, moss-tinted sand); 'Exposure' with a sand slider half raked, its value '+0.7' engraved into the walnut frame's end cap; 'Format' with ONE shared pill-shaped sand tray holding three stones, the middle one ringed by raked circles and moss, and the words RAW JPG HEIF pressed into the sand under each stone; and a full-width 'Shoot' button tray whose word SHOOT is pressed into the sand as carved letters. Generous even spacing, realistic UI proportions, labels never floating. Chunky stylized controls, realistic grain and raking light. Palette sand, charcoal, walnut, moss. No perspective, no plants, no meditation imagery.
+
+## 4. The rock for the thinking state
+
+Four rocks, square. The second (basalt with moss in a crack) is the one in `thinking.js`. Each was cut out of its white background by flood-filling from the corners and trimmed.
+
+1. Straight top-down view of a single weathered Japanese dry-garden rock, low and craggy, dark slate grey granite with subtle lighter flecks and faint lichen, irregular rounded silhouette slightly wider than tall, soft natural light from the upper left so the upper-left faces are lit and lower-right faces fall into shade, centered, isolated on a plain flat pure white background, no cast shadow, no sand, no other objects, crisp detailed texture, realistic
+
+2. Overhead orthographic view looking straight down at one dark basalt garden stone as used in a Kyoto karesansui rock garden, rough faceted top with a few cracks and a small patch of green moss in one crevice, compact irregular outline, lit softly from the upper left, centered on a plain flat pure white background, no shadow on the ground, nothing else in frame, realistic photographic texture
+
+3. Directly overhead view of a single smooth weathered river boulder for a zen sand garden, charcoal grey with soft mottling and a few pale mineral veins, organic lumpy oval outline, gentle satin sheen, light from the upper left, centered, isolated on a flat pure white background, no ground shadow, no sand, realistic detailed stone texture
+
+4. Top-down view straight down onto a single tall jagged garden rock seen from above, layered dark grey stone with sharp ridges and deep crevices, a little moss on the lit side, irregular angular silhouette, lit from the upper left with deep shade on the lower right faces, centered on a plain flat pure white background, no cast shadow, no other objects, realistic
+
+## 5. Sounds
+
+Each prompt was run once for four takes; the steadiest take (loops) or the cleanest attack (one-shots) was kept and trimmed. Loops have their tail cross-faded into their head so they repeat without a seam.
+
+- **the rake loop (slider, toggle, button, radio, signature)**: Close-up foley: a small bamboo rake with four tines dragged slowly and steadily through fine dry sand in a shallow wooden tray. Soft continuous granular hiss and gentle scrape, even level throughout, no clicks, no taps, no voices. Seamless loop, about 3 seconds. Dry studio, no reverb.
+
+- **settle (sand slumping)**: Close-up foley: a small pile of fine dry sand slumping and trickling down a little slope, a soft brief granular sigh that fades out, under one second. Dry studio, no reverb, nothing else.
+
+- **sweep (the rake smoothing the tray)**: Close-up foley: the flat back of a small wooden rake sweeping fine dry sand smooth in one gentle stroke across a shallow tray, a soft airy whoosh of grains that swells and fades, about one second. Dry studio, no reverb.
+
+- **stone sliding (cut from the set before release)**: Close-up foley: a smooth river stone pushed and sliding across fine dry sand in a shallow tray, a soft gritty scrape about half a second long that slows and stops against a small pile of sand. Dry studio, no reverb.
+
+- **stone set down (thock)**: Close-up foley: a smooth river stone set down onto fine dry sand, a single soft muted low thock with a tiny crunch of grains, very short, one hit only. Dry studio, no reverb.
+
+- **tap of bamboo on the frame**: Close-up foley: a bamboo stick lightly tapping the inner rim of a walnut wooden tray, a single soft hollow wooden tock, very short, one hit only. Dry studio, no reverb.
+
+- **drift loop (thinking)**: Close-up foley: fine dry sand being drawn slowly round in a steady circle by a fingertip in a shallow tray, a soft continuous whispering hiss of grains, smooth and even, no scrapes, no clicks, no taps, no voices. Seamless loop, about 3 seconds. Dry studio, no reverb.
+
+- **reach (searching, one per spoke)**: Close-up foley: a single quick straight stroke dragged outward through fine dry sand, a short granular swish that rises and ends with a tiny spill of grains, under one second, one stroke only. Dry studio, no reverb, nothing else.
+
+- **flow loop (using a tool)**: Close-up foley: fine dry sand flowing and streaming gently, like a slow soft river of grains sliding past a stone, a smooth airy continuous rush, even level throughout, no drips, no clicks, no voices. Seamless loop, about 3 seconds. Dry studio, no reverb.
+
+- **scratch (writing, one per word)**: Close-up foley: a fingertip writing one short quick dash in fine dry sand, a tiny crisp scratchy whisper of grains, about a quarter of a second, one stroke only. Dry studio, no reverb, nothing else.

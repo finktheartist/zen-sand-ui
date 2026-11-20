@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zen Sand starter</title>
+<style>
+  html, body { margin: 0; background: #e9e4da; color: #2b2a27; font: 15px/1.45 ui-sans-serif, system-ui, sans-serif; }
+  main { min-height: 100vh; display: grid; place-content: center; justify-items: center; gap: 14px; padding: 24px 16px; box-sizing: border-box; }
+  sand-finger { width: min(520px, calc(100vw - 32px)); }
+  p { margin: 0; color: #7c766b; }
+</style>
+</head>
+<body>
+<main>
+  <sand-finger></sand-finger>
+  <p>Draw in it with a finger or the mouse. Double-click to smooth it.</p>
+</main>
+<script src="core.js"></script>
+<script>
+// The smallest whole Zen Sand control: a tray you draw in with a fingertip. Copy this to start a new one.
+// The pattern every control follows:
+//   aspect     height / width of the tray
+//   init()     once: roles, keys, pointer listeners (call Sound.wake() on the first gesture)
+//   layout()   after every resize: lay the sand down (this.h, one cell per CSS px) and anything sized to the tray
+//   step(dt)   every frame: move things, carve this.h, call this.relax(...) where sand moved
+//   sprites()  every frame: draw anything that is not sand (a rake, a stick) on the overlay canvas this.ox
+const { Sound, SandTray } = window.ZenSand;
+class SandFinger extends SandTray {
+  get aspect() { return 0.5; }
+  init() {
+    this.setAttribute('role', 'img'); this.setAttribute('aria-label', 'A tray of sand to draw in');
+    this.addEventListener('pointerdown', (e) => { Sound.wake(); this.setPointerCapture(e.pointerId); this.pen = this.at(e); });
+    this.addEventListener('pointermove', (e) => { if (!this.pen) return; const p = this.at(e); this.dig(this.pen, p); this.pen = p; });
+    this.addEventListener('pointerup', () => { this.pen = null; Sound.play('settle', 0.2); });
+    this.addEventListener('dblclick', () => { this.smooth = 1; Sound.play('settle', 0.3, 0.8); });
+  }
+  at(e) { const b = this.getBoundingClientRect(); return [(e.clientX - b.left) / b.width * this.W, (e.clientY - b.top) / b.height * this.H]; }
+  layout() {
+    // raked straight lines to start: this.lines(x, y, howMany) is the core's hand-wobbled raked pattern
+    const { x0, x1, y0, y1 } = this.inner;
+    for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++) { const i = y * this.W + x; if (this.inside[i]) this.h[i] = this.lines(x, y, 7) * 0.5; }
+    this.base = new Float32Array(this.h); this.relax(x0, x1, 4);
+  }
+  // A fingertip dragged from a to b: dig a rounded groove and put the sand it moved on both sides of it.
+  // Keep the volume: what leaves the groove lands beside it, or the sand looks painted, not pushed.
+  dig([ax, ay], [bx, by]) {
+    const n = Math.ceil(Math.hypot(bx - ax, by - ay)) || 1, r = Math.max(2, this.H * 0.025), W = this.W, h = this.h;
+    for (let s = 1; s <= n; s++) {
+      const x = ax + (bx - ax) * s / n, y = ay + (by - ay) * s / n; let moved = 0; const side = [];
+      for (let yy = Math.floor(y - r * 2.4); yy <= y + r * 2.4; yy++) for (let xx = Math.floor(x - r * 2.4); xx <= x + r * 2.4; xx++) {
+        const i = yy * W + xx; if (!this.inside[i]) continue;
+        const d = Math.hypot(xx + 0.5 - x, yy + 0.5 - y);
+        if (d < r) { const want = -1.2 * (1 - (d / r) ** 2); if (h[i] > want) { moved += h[i] - want; h[i] = want; } }
+        else if (d < r * 2.4) side.push(i);
+      }
+      for (const i of side) h[i] += moved * 0.95 / side.length;
+    }
+    this.relax(Math.min(ax, bx) - r * 4, Math.max(ax, bx) + r * 4, 1);    // let it slump to its angle of rest
+    this.dirty = true;                                                    // tell the core to upload the sand to the GPU
+  }
+  step(dt) {
+    if (this.smooth > 0) {                                                // double-click: ease back to the raked lines
+      this.smooth -= dt; for (let i = 0; i < this.h.length; i++) this.h[i] += (this.base[i] - this.h[i]) * Math.min(1, dt * 4);
+      this.dirty = true;
+    }
+  }
+}
+customElements.define('sand-finger', SandFinger);
+</script>
+</body>
+</html>
